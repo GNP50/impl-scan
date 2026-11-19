@@ -1,0 +1,18 @@
+{{!--
+  dispatch: a match with one arm per item. The arm body is the partial named by
+  `body` (usually an inline partial), rendered with the item as context: {{name}},
+  {{path}}, {{type}}, {{meta.x}}... Inside the arm, `T` is the concrete type.
+  Parameters: on (the matched expression), enum, items, body.
+  Usage:
+    {{#*inline "arm"}}T::default().run({{quote name}}){{/inline}}
+    {{> dispatch on="kind" enum="Kind" items=strategies body="arm"}}
+--}}
+match {{on}} {
+{{#each items}}
+    {{../enum}}::{{pascal name}} => {
+        #[allow(dead_code)]
+        type T = {{path}};
+        {{> (lookup ../this "body")}}
+    }
+{{/each}}
+}

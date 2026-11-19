@@ -1,0 +1,15 @@
+{{!-- A project partial: the table each strategy declared with #[register(table = "...")]. --}}
+impl StrategyKind {
+    /// The table this strategy reads, from `#[register(table = "...")]`.
+    pub fn table(self) -> ::core::option::Option<TableKind> {
+        match self {
+{{#each strategies}}
+{{#if meta.table}}
+            StrategyKind::{{pascal name}} => TableKind::from_name({{quote meta.table}}),
+{{else}}
+            StrategyKind::{{pascal name}} => ::core::option::Option::None,
+{{/if}}
+{{/each}}
+        }
+    }
+}

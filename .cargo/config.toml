@@ -1,0 +1,3 @@
+# Keep the lockfile buildable with the workspace rust-version (1.85).
+[resolver]
+incompatible-rust-versions = "fallback"

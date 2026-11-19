@@ -1,0 +1,27 @@
+[workspace]
+members = ["impl-scan-attr", "impl-scan", "example"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/GNP50/impl-scan"
+homepage = "https://github.com/GNP50/impl-scan"
+keywords = ["codegen", "build-script", "registry", "reflection", "handlebars"]
+categories = ["development-tools::build-utils", "development-tools::procedural-macro-helpers"]
+
+[workspace.dependencies]
+syn = { version = "2.0.119", features = ["full", "parsing", "visit", "extra-traits"] }
+quote = "1.0.47"
+proc-macro2 = { version = "1.0.107", features = ["span-locations"] }
+handlebars = "6.4.4"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+walkdir = "2.5.0"
+
+[workspace.lints.rust]
+missing_docs = "deny"
+unsafe_code = "deny"
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(docsrs)'] }

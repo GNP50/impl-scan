@@ -1,0 +1,28 @@
+version: 2
+
+# Group minor and patch updates. Major version updates need separate review.
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    groups:
+      cargo:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      # pest 2.9 pulls in stacker/psm/ar_archive_writer, which need Rust 1.88 (MSRV is 1.85).
+      - dependency-name: "pest*"
+        versions: [">= 2.9.0"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    groups:
+      actions:
+        patterns: ["*"]

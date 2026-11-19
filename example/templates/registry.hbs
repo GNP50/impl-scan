@@ -1,0 +1,15 @@
+{{> registry_enum enum="StrategyKind" items=strategies}}
+
+{{> registry_enum enum="TableKind" items=tables}}
+
+{{> store store="Strategies" enum="StrategyKind" trait="crate::Strategy" key="u64" items=strategies serde=true}}
+
+{{> store store="Tables" enum="TableKind" trait="crate::Table" key="u64" items=tables}}
+
+{{#*inline "default_arm"}}::std::boxed::Box::new(<T as ::core::default::Default>::default()){{/inline}}
+/// A default-configured strategy of the given kind.
+pub fn default_strategy(kind: StrategyKind) -> ::std::boxed::Box<dyn crate::Strategy> {
+    {{> dispatch on="kind" enum="StrategyKind" items=strategies body="default_arm"}}
+}
+
+{{> table_of}}

@@ -1,0 +1,23 @@
+[package]
+name = "impl-scan-example"
+description = "A runnable example of impl-scan: strategies and tables registered at build time"
+version = "0.0.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[features]
+default = []
+experimental = []
+
+[dependencies]
+impl-scan-attr = { path = "../impl-scan-attr" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[build-dependencies]
+impl-scan = { path = "../impl-scan" }
+
+[lints]
+workspace = true
